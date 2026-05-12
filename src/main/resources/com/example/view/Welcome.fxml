@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="black" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.WelcomeController">
+    <children>
+        <Text fill="#000000" layoutX="115.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a mi GIMNASIO" textAlignment="CENTER">
+            <font>
+                <Font size="26.0" />
+            </font>
+        </Text>
+
+        <Button fx:id="adminWayButton" layoutX="225.0" layoutY="275.0" mnemonicParsing="false" onAction="#setAdminWayButton" prefHeight="41.0" prefWidth="96.0" text="Iniciar">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
