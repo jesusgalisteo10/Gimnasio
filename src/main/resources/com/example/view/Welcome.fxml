@@ -1,21 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="black" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.WelcomeController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212; -fx-background-radius: 10px;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.WelcomeController">
     <children>
-        <Text fill="#000000" layoutX="115.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a mi GIMNASIO" textAlignment="CENTER">
+        <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="GYM PORTAL" wrappingWidth="142.6103515625">
             <font>
-                <Font size="26.0" />
+                <Font size="12.0" />
             </font>
+            <fill>
+                <Color red="0.800000011920929" green="0.800000011920929" blue="0.800000011920929" />
+            </fill>
         </Text>
+        <VBox alignment="CENTER" layoutX="120.0" layoutY="80.0" spacing="20.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+            <children>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Bienvenido a mi GIMNASIO" textAlignment="CENTER" wrappingWidth="360.0">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                    <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0">
+                            <color>
+                                <Color opacity="0.30000001192092896" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </Text>
+                <VBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Text fill="#cccccc" strokeType="OUTSIDE" strokeWidth="0.0" text="Donde tu transformación comienza" textAlignment="CENTER">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Text>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cc3333" height="3.0" width="80.0" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
 
-        <Button fx:id="adminWayButton" layoutX="225.0" layoutY="275.0" mnemonicParsing="false" onAction="#setAdminWayButton" prefHeight="41.0" prefWidth="96.0" text="Iniciar">
+        <Button fx:id="adminWayButton" alignment="CENTER" graphicTextGap="8.0" layoutX="240.0" layoutY="280.0" mnemonicParsing="false" onAction="#setAdminWayButton" prefHeight="41.0" prefWidth="120.0" style="-fx-background-color: #cc3333; -fx-background-radius: 20px; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="ENTRAR" textFill="WHITE">
             <font>
-                <Font size="17.0" />
+                <Font size="16.0" />
             </font>
+            <effect>
+                <DropShadow color="#333333" height="10.0" radius="4.5" width="10.0" />
+            </effect>
+            <graphic>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="▶" wrappingWidth="14.34375">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+            </graphic>
         </Button>
     </children>
 </AnchorPane>

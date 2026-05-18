@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="800.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.MainController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="800.0" style="-fx-background-color: #1a1a1a;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.MainController">
     <children>
-        <TableView fx:id="tableInfo" layoutX="50.0" layoutY="129.0" prefHeight="291.0" prefWidth="697.0" style="-fx-background-color: grey;">
+        <Pane prefHeight="110.0" prefWidth="800.0" style="-fx-background-color: #252525;">
+            <children>
+                <Label layoutX="50.0" layoutY="35.0" text="Gestión de Gimnasio" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <HBox layoutX="350.0" layoutY="30.0" spacing="15.0">
+                    <children>
+                        <Button fx:id="addClient" mnemonicParsing="false" onMouseClicked="#openAddClient" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Agregar Cliente" />
+                        <Button fx:id="deleteClient" mnemonicParsing="false" onAction="#openDeleteClient" onMouseClicked="#openAddClient" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Eliminar Cliente" />
+                        <Button fx:id="showMachines" mnemonicParsing="false" onAction="#openShowMachines" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Listar Maquinas" />
+                    </children>
+                </HBox>
+            </children>
+            <effect>
+                <DropShadow height="10.0" radius="4.5" width="10.0" />
+            </effect>
+        </Pane>
+
+        <TableView fx:id="tableInfo" layoutX="50.0" layoutY="130.0" prefHeight="280.0" prefWidth="700.0" style="-fx-background-color: #2d2d2d; -fx-control-inner-background: #2d2d2d; -fx-text-fill: white;">
             <columns>
-                <TableColumn fx:id="colCode" prefWidth="80.00006103515625" text="Cod. Cliente" />
-                <TableColumn fx:id="colName" prefWidth="119.19998168945312" text="Nombre" />
-                <TableColumn fx:id="colSurname" prefWidth="116.79998779296875" text="Apellido" />
-                <TableColumn fx:id="colDNI" prefWidth="108.800048828125" text="DNI" />
-                <TableColumn fx:id="colSex" minWidth="0.0" prefWidth="94.39996337890625" text="Sexo" />
-                <TableColumn fx:id="colEmail" prefWidth="176.00002441406252" text="Email" />
+                <TableColumn fx:id="colCode" prefWidth="85.0" text="Cod. Cliente" />
+                <TableColumn fx:id="colName" prefWidth="110.0" text="Nombre" />
+                <TableColumn fx:id="colSurname" prefWidth="110.0" text="Apellido" />
+                <TableColumn fx:id="colDNI" prefWidth="100.0" text="DNI" />
+                <TableColumn fx:id="colSex" prefWidth="80.0" text="Sexo" />
+                <TableColumn fx:id="colEmail" prefWidth="213.0" text="Email" />
             </columns>
         </TableView>
-        <Button fx:id="addClient" layoutX="136.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#openAddClient" prefHeight="58.0" prefWidth="127.0" text="Agregar Cliente">
+
+        <Button fx:id="addMachineToClient" layoutX="100.0" layoutY="435.0" mnemonicParsing="false" onAction="#openAddMachineClient" prefHeight="50.0" prefWidth="240.0" style="-fx-background-color: #cc3333; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;" text="Añadir Maquinas al Cliente">
             <font>
                 <Font size="14.0" />
-            </font></Button>
-        <Button fx:id="showMachines" layoutX="434.0" layoutY="32.0" mnemonicParsing="false" onAction="#openShowMachines" prefHeight="58.0" prefWidth="121.0" text="Listar Maquinas">
+            </font>
+        </Button>
+        <Button fx:id="deleteMachineToClient" layoutX="460.0" layoutY="435.0" mnemonicParsing="false" onAction="#openDeleteMachineClient" prefHeight="50.0" prefWidth="240.0" style="-fx-background-color: transparent; -fx-border-color: #cc3333; -fx-border-width: 2; -fx-text-fill: #cc3333; -fx-font-weight: bold; -fx-cursor: hand;" text="Eliminar Maquinas al Cliente">
             <font>
                 <Font size="14.0" />
-            </font></Button>
-        <Button fx:id="addMachineToClient" layoutX="99.0" layoutY="441.0" mnemonicParsing="false" onAction="#openAddMachineClient" prefHeight="58.0" prefWidth="201.0" text="Añadir Maquinas al Cliente">
-            <font>
-                <Font size="14.0" />
-            </font></Button>
-        <Button fx:id="deleteMachineToClient" layoutX="493.0" layoutY="441.0" mnemonicParsing="false" onAction="#openDeleteMachineClient" prefHeight="58.0" prefWidth="202.0" text="Eliminar Maquinas al Cliente">
-            <font>
-                <Font size="14.0" />
-            </font></Button>
-        <Button fx:id="deleteClient" layoutX="285.0" layoutY="32.0" mnemonicParsing="false" onAction="#openDeleteClient" onMouseClicked="#openAddClient" prefHeight="58.0" prefWidth="127.0" text="Eliminar Cliente">
-            <font>
-                <Font size="14.0" />
-            </font></Button>
+            </font>
+        </Button>
     </children>
 </AnchorPane>

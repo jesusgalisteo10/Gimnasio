@@ -8,6 +8,12 @@
 
 <AnchorPane fx:id="anchorPane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="800.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.ShowEditMachinesController">
     <children>
+        <Button fx:id="backButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="127.0" style="-fx-background-color: #252525; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="⬅ Volver">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+
         <TableView fx:id="tableMachine" layoutX="186.0" layoutY="35.0" prefHeight="451.0" prefWidth="498.0">
             <columns>
                 <TableColumn fx:id="colRoom" prefWidth="53.60003662109375" text="Sala" />
@@ -32,6 +38,5 @@
             <font>
                 <Font size="14.0" />
             </font></Button>
-
     </children>
 </AnchorPane>
