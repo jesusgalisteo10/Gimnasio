@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,30 +36,28 @@ public class DeleteMachineToClientController extends Controller implements Initi
     private ImageView goBackButton;
 
     private Map<String, String> machinesMap;
-    private  Map<String, String> clientsMap;
+    private Map<String, String> clientsMap;
 
     @Override
     public void onOpen(Object input) throws Exception {
-
     }
 
     @Override
     public void onClose(Object output) {
-
     }
+
     /**
      * Inicializa el controlador al cargar el FXML.
-     * Recupera todos los clientes y máquinas de la base de datos para rellenar los cuadros combinados de clientes y máquinas.
-     * Mapea los códigos de cliente a los nombres de cliente y los códigos de máquina a los tipos de máquina para la visualización en los cuadros combinados.
-     * Configura el manejo de eventos para eliminar una máquina de un cliente.
-     * Muestra alertas para eliminación exitosa, error de asignación o fallo en la operación de base de datos.
+     * Recupera todos los clientes de la base de datos para rellenar su combo.
+     * Crea un mapa con todas las máquinas disponibles para traducir sus códigos a nombres.
+     * Configura un escuchador dinámico para que el combo de máquinas solo muestre las que posee el cliente seleccionado.
      *
      * @param location la ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si la ubicación no se conoce
      * @param resources los recursos utilizados para localizar el objeto raíz, o null si el objeto raíz no fue localizado
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Rellena el cuadro combinado de clientes con los nombres de los clientes.
+        // 1. Rellena el cuadro combinado de clientes con los nombres de los clientes.
         List<Client> clients = ClientDAO.build().findAll();
         clientsMap = new HashMap<>();
         for (Client client : clients) {
@@ -66,7 +65,7 @@ public class DeleteMachineToClientController extends Controller implements Initi
         }
         clientComboBox.setItems(FXCollections.observableArrayList(clientsMap.values()));
 
-        // Rellena el cuadro combinado de máquinas con los tipos de máquina.
+        // 2. Cargamos el mapa de todas las máquinas en memoria para traducir los códigos a textos reales
         List<Machine> machines;
         try {
             machines = MachineDAO.findAll();
@@ -77,14 +76,71 @@ public class DeleteMachineToClientController extends Controller implements Initi
         for (Machine machine : machines) {
             machinesMap.put(String.valueOf(machine.getCode()), machine.getMachineType());
         }
-        machineComboBox.setItems(FXCollections.observableArrayList(machinesMap.values()));
+
+        // 3. SOLUCIÓN DEFINITIVA: Bloqueamos el combo para evitar el recuadro blanco,
+        // pero forzamos por CSS que la opacidad visual sea del 100% para que se lea perfecto.
+        machineComboBox.setDisable(true);
+        machineComboBox.setPromptText("Elige un cliente primero");
+        machineComboBox.setStyle("-fx-opacity: 1.0; -fx-background-color: #E0E0E0;");
+
+        // 4. ESCUCHADOR DINÁMICO: Al cambiar el cliente seleccionado, se filtran sus máquinas en tiempo real
+        clientComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                String codeClient = "";
+                for (String key : clientsMap.keySet()) {
+                    if (clientsMap.get(key).equals(newValue)) {
+                        codeClient = key;
+                        break;
+                    }
+                }
+
+                if (!codeClient.isEmpty()) {
+                    try {
+                        int clientCode = Integer.parseInt(codeClient);
+                        // Buscamos solo las máquinas que pertenecen a este cliente en la BD
+                        List<Integer> assignedMachineIds = Client_MachineDAO.findMachinesByClient(clientCode);
+
+                        // Convertimos esos códigos numéricos a los nombres correspondientes (ej: "pesas")
+                        List<String> assignedMachineNames = new ArrayList<>();
+                        for (Integer machineId : assignedMachineIds) {
+                            String name = machinesMap.get(String.valueOf(machineId));
+                            if (name != null) {
+                                assignedMachineNames.add(name);
+                            }
+                        }
+
+                        // Actualizamos el ComboBox de máquinas con la lista filtrada
+                        machineComboBox.setItems(FXCollections.observableArrayList(assignedMachineNames));
+
+                        // Habilitamos el combo con su estilo normal
+                        machineComboBox.setDisable(false);
+                        machineComboBox.setStyle("-fx-opacity: 1.0;");
+
+                        // Si el cliente no tiene ninguna máquina asignada
+                        if (assignedMachineNames.isEmpty()) {
+                            machineComboBox.setPromptText("Sin máquinas asignadas");
+                        } else {
+                            machineComboBox.setPromptText("Selecciona Máquina");
+                        }
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        showAlert(Alert.AlertType.ERROR, "Error", "No se pudieron cargar las máquinas del cliente.");
+                    }
+                }
+            } else {
+                machineComboBox.getItems().clear();
+                machineComboBox.setDisable(true);
+                machineComboBox.setPromptText("Elige un cliente primero");
+                machineComboBox.setStyle("-fx-opacity: 1.0; -fx-background-color: #E0E0E0;");
+            }
+        });
     }
 
     /**
      * Maneja la acción de eliminar una máquina de un cliente.
      * Recupera los códigos de máquina y cliente seleccionados de los cuadros combinados, los valida,
      * y elimina la asociación de la base de datos.
-     * Muestra mensajes de alerta apropiados para éxito, error de asignación o fallo en la operación de base de datos.
      */
     @FXML
     private void deleteMachineFromClient() {
@@ -116,6 +172,13 @@ public class DeleteMachineToClientController extends Controller implements Initi
                 boolean deleted = Client_MachineDAO.deleteMachineFromClient(clientCode, machineCode);
                 if (deleted) {
                     showAlert(Alert.AlertType.INFORMATION, "Éxito", "La máquina se ha eliminado del cliente correctamente.");
+
+                    // Limpiar selección tras borrar para obligar a refrescar
+                    machineComboBox.setValue(null);
+                    clientComboBox.setValue(null);
+                    machineComboBox.setDisable(true);
+                    machineComboBox.setPromptText("Elige un cliente primero");
+                    machineComboBox.setStyle("-fx-opacity: 1.0; -fx-background-color: #E0E0E0;");
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Error", "La máquina no estaba asignada a este cliente.");
                 }
