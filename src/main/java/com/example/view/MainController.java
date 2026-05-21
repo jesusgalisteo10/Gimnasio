@@ -183,7 +183,7 @@ public class MainController extends Controller implements Initializable {
                 } else {
                     // Muestra un error si la longitud excede los 60 caracteres.
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Error, field cannot exceed 50 characters");
+                    alert.setContentText("Error, field cannot exceed 60 characters");
                     alert.show();
                 }
             } catch (NumberFormatException e) {
