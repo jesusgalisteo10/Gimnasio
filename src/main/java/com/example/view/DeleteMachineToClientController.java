@@ -77,7 +77,7 @@ public class DeleteMachineToClientController extends Controller implements Initi
             machinesMap.put(String.valueOf(machine.getCode()), machine.getMachineType());
         }
 
-        // 3. SOLUCIÓN DEFINITIVA: Bloqueamos el combo para evitar el recuadro blanco,
+        // 3 Bloqueamos el combo para evitar el recuadro blanco,
         // pero forzamos por CSS que la opacidad visual sea del 100% para que se lea perfecto.
         machineComboBox.setDisable(true);
         machineComboBox.setPromptText("Elige un cliente primero");
