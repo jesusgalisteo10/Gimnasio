@@ -6,37 +6,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="800.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.ShowEditMachinesController">
+<AnchorPane fx:id="anchorPane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="800.0" style="-fx-background-color: #1E1E24;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.ShowEditMachinesController">
     <children>
-        <Button fx:id="backButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="127.0" style="-fx-background-color: #252525; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="⬅ Volver">
+        <Button fx:id="backButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="135.0" style="-fx-background-color: #3A3A42; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 6;" text="⬅ Volver">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
 
-        <TableView fx:id="tableMachine" layoutX="186.0" layoutY="35.0" prefHeight="451.0" prefWidth="498.0">
+        <TableView fx:id="tableMachine" layoutX="186.0" layoutY="35.0" prefHeight="451.0" prefWidth="580.0" style="-fx-background-radius: 6; -fx-border-radius: 6;">
             <columns>
-                <TableColumn fx:id="colRoom" prefWidth="53.60003662109375" text="Sala" />
-                <TableColumn fx:id="colCodeMachine" prefWidth="191.199951171875" text="Codigo Maquina" />
-                <TableColumn fx:id="colMachine" prefWidth="249.60003662109375" text="Maquinas " />
+                <TableColumn fx:id="colRoom" prefWidth="80.0" text="Sala" />
+                <TableColumn fx:id="colCodeMachine" prefWidth="220.0" text="Código Máquina" />
+                <TableColumn fx:id="colMachine" prefWidth="278.0" text="Máquinas" />
             </columns>
         </TableView>
-        <Button fx:id="addMachine" layoutX="25.0" layoutY="238.0" mnemonicParsing="false" onAction="#openAddMachine" prefHeight="62.0" prefWidth="127.0" text="Añadir maquinas ">
-            <font>
-                <Font size="14.0" />
-            </font></Button>
-        <Button fx:id="addRoom" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" onAction="#openAddRoom" prefHeight="61.0" prefWidth="127.0" text="Añadir Salas">
-            <font>
-                <Font size="14.0" />
-            </font></Button>
 
-        <Button fx:id="deleteMachine" layoutX="25.0" layoutY="416.0" mnemonicParsing="false" onAction="#openDeleteMachine" prefHeight="61.0" prefWidth="127.0" text="Eliminar maquina">
+        <Button fx:id="addRoom" layoutX="25.0" layoutY="140.0" mnemonicParsing="false" onAction="#openAddRoom" prefHeight="55.0" prefWidth="135.0" style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 6;" text="Añadir Sala">
             <font>
                 <Font size="14.0" />
-            </font></Button>
-        <Button fx:id="deleteRoom" layoutX="25.0" layoutY="327.0" mnemonicParsing="false" onAction="#openDeleteRoom" prefHeight="62.0" prefWidth="127.0" text="Eliminar Sala">
+            </font>
+        </Button>
+
+        <Button fx:id="addMachine" layoutX="25.0" layoutY="215.0" mnemonicParsing="false" onAction="#openAddMachine" prefHeight="55.0" prefWidth="135.0" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 6;" text="Añadir Máquina">
             <font>
                 <Font size="14.0" />
-            </font></Button>
+            </font>
+        </Button>
+
+        <Button fx:id="deleteRoom" layoutX="25.0" layoutY="355.0" mnemonicParsing="false" onAction="#openDeleteRoom" prefHeight="55.0" prefWidth="135.0" style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 6;" text="Eliminar Sala">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+
+        <Button fx:id="deleteMachine" layoutX="25.0" layoutY="430.0" mnemonicParsing="false" onAction="#openDeleteMachine" prefHeight="55.0" prefWidth="135.0" style="-fx-background-color: #C82333; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 6;" text="Eliminar Máquina">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>
